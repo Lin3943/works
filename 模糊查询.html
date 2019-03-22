@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table
+        {
+            border-collapse: collapse;
+            text-align: center;
+        }
+        td
+        {
+            width: 80px;
+            height: 30px;
+            border: 1px solid #000000;
+        }
+    </style>
+</head>
+<body>
+<input type="text" id="texts"><label for="texts"></label>
+<table id="table"></table>
+<script>
+
+    var phoneList=[
+        {checked:true,icon:"img/icon_a.jpeg",brand:"Apple",goods:"Iphone X",num:1, color:"black", price:"7988"},
+        {checked:false,icon:"img/icon_b.jpeg",brand:"Oppo",goods:"Oppo R9",num:1, color:"black", price:"2500"},
+        {checked:true,icon:"img/icon_c.jpeg",brand:"huaWei",goods:"HuaWei",num:1, color:"black", price:"2588"},
+        {checked:false,icon:"img/icon_d.jpeg",brand:"Xiaomi",goods:"Note",num:1, color:"black", price:"2488"},
+        {checked:true,icon:"img/icon_e.jpeg",brand:"Sanxing",goods:"sanxing",num:1, color:"black", price:"8888"}
+    ];
+    var text=document.getElementById("texts");
+    var table=document.getElementById("table");
+    createTable(phoneList);
+    text.addEventListener("input",inputHandler);
+    function inputHandler(e) {
+        e=e||window.event
+        var s=text.value
+        var arr=[];
+        phoneList.forEach(function (t) {
+            if(t.goods.indexOf(s)>-1){
+                arr.push(t)
+            }
+        })
+        createTable(arr)
+    }
+    function createTable(data) {
+        var str="";
+        str+="<tr>";
+        for(var i in data[0]){
+            str+="<th>"+i+"</th>"
+        }
+        str+="</tr>";
+        data.forEach(function (t) {
+            str+="<tr>";
+            for(var j in t){
+                if(j==="checked"){
+                    str+="<td><input type='checkbox' "+(t[j]?"checked":"")+"></td>";
+                    continue;
+                }
+                if (j==="num"){
+                    str+="<td><input type='text' value='"+t[j]+"'></td>";
+                    continue;
+                }
+                if(j==="icon") {
+                    str+="<td><img src='"+t[j]+"'></td>";
+                    continue;
+                }
+                str+="<td>"+t[j]+"</td>"
+            }
+            str+="</tr>"
+        });
+        table.innerHTML=str;
+    }
+
+
+    var arr = [
+      {
+        id: "1",
+        name: "king",
+        age: "112",
+        pid: "0",
+        child: [
+          {
+            id: "11",
+            pid: "1",
+            name: "Johnny",
+            age: "77",
+            child: [
+              {
+                id: "111",
+                pid: "11",
+                name: "som",
+                age: "39"
+              }
+            ]
+          },
+          {
+            id: "12",
+            pid: "1",
+            name: "Susan",
+            age: "75",
+            child: [
+              {
+                id: "121",
+                pid: "12",
+                name: "jack",
+                age: "32"
+              },
+              {
+                id: "122",
+                pid: "12",
+                name: "lily",
+                age: "32"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: "2",
+        name: "queen",
+        age: "110",
+        pid: "0",
+        child: [
+          {
+            id: "21",
+            pid: "2",
+            name: "killer",
+            age: "70",
+            child: [
+              {
+                id: "211",
+                pid: "21",
+                name: "Hebe",
+                age: "29"
+              },
+              {
+                id: "212",
+                pid: "21",
+                name: "kitty",
+                age: "29"
+              }
+            ]
+          },
+          {
+            id: "22",
+            pid: "2",
+            name: "mike",
+            age: "75",
+            child: [
+              {
+                id: "221",
+                pid: "22",
+                name: "qin",
+                age: "32"
+              }
+            ]
+          }
+        ]
+      }
+    ];
+    let a = arr.filter(v => v.name === "king")
+
+</script>
+</body>
+</html>

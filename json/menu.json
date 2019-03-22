@@ -1,0 +1,76 @@
+[
+  {
+    "MENUID": "xsgl",
+    "MENUMC": "输电运维",
+    "XH": "02",
+    "PMENUID": "0",
+    "sonMenu": [
+      {
+        "MENUID": "xsjhgl",
+        "PMENUID": "xsgl",
+        "MENUMC": "巡视计划",
+        "MENUURL": "sss",
+        "OPEN_URL": "/ss/dd",
+        "XH": "0201"
+      },
+      {
+        "MENUID": "lsjh",
+        "PMENUID": "xsgl",
+        "MENUMC": "临时计划",
+        "MENUURL": "aaa",
+        "OPEN_URL": "/bb/dd",
+        "XH": "0202"
+      },
+      {
+        "MENUID": "test",
+        "PMENUID": "xsgl",
+        "MENUMC": "测试",
+        "MENUURL": "test",
+        "OPEN_URL": "/ss/dd",
+        "XH": "0203",
+        "sonMenu": [
+          {
+            "MENUID": "111",
+            "PMENUID": "test",
+            "MENUMC": "测试111",
+            "MENUURL": "test11",
+            "OPEN_URL": "/ss/dd",
+            "XH": "020301"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "MENUID": "htxt",
+    "MENUMC": "后台系统",
+    "XH": "03",
+    "PMENUID": "0",
+    "sonMenu": [
+      {
+        "MENUID": "cdgl",
+        "PMENUID": "htxt",
+        "MENUMC": "用户管理",
+        "MENUURL": "sss",
+        "OPEN_URL": "/ss/dd",
+        "XH": "0301"
+      },
+      {
+        "MENUID": "jsgl",
+        "PMENUID": "htxt",
+        "MENUMC": "角色管理",
+        "MENUURL": "aaa",
+        "OPEN_URL": "/bb/dd",
+        "XH": "0302"
+      },
+      {
+        "MENUID": "test",
+        "PMENUID": "htxt",
+        "MENUMC": "测试",
+        "MENUURL": "test",
+        "OPEN_URL": "/ss/dd",
+        "XH": "0303"
+      }
+    ]
+  }
+]

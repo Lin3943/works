@@ -1,0 +1,15 @@
+<link href="./lib/bootstrap.min.css" rel="stylesheet">
+<link href="./lib/bootstrap-table.min.css" rel="stylesheet">
+<link href="./lib/animate.css" rel="stylesheet">
+<script type="text/javascript" src="./lib/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="./lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="./lib/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="./lib/bootstrap-treeview.min.js"></script>
+
+
+
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.css" rel="stylesheet">
+
+<script src="https://cdn.bootcss.com/jquery-treegrid/0.2.0/js/jquery.treegrid.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-table/1.12.0/extensions/treegrid/bootstrap-table-treegrid.js"></script>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TreeView-Lise</title>
+    <link href="./lib/bootstrap.min.css" rel="stylesheet">
+	<link href="./lib/bootstrap-table.min.css" rel="stylesheet">
+    <script type="text/javascript" src="./lib/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="./lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="./lib/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="./lib/bootstraptable-treeview.js"></script>
+	<!-- <script type="text/javascript" src="D:\desktop\lib\bootstrap-treeview.min.js"></script> -->
+	<style>
+		.header{
+			height: 60px;
+			line-height: 60px;
+			font-size: 16px;
+		}
+		.container{
+			margin: 4px auto;
+			width: 100%;
+		}
+		.turnIcon{
+			margin: 8px;
+			display: block;
+			text-align: center;
+			width: 60px;
+		}
+	</style>
+</head>
+
+<body>
+    <div style="margin:20px">
+        <input type="button" id="expandAllTree" value="展开所有"  class="btn btn-defaul"/>
+        <input type="button" id="collapseAllTree" value="折叠所有" class="btn btn-primary"/>
+		<div id="btn-pms" class="text-center header">权限管理</div>
+		  <div id="btn-sss" class="text-center header">
+			  <button class="btn-sm btn-primary" style="margin: 1% 1% 1% 90%;" onclick="createNew()">新增</button>
+		  </div>
+        <table id="tree_table"></table>
+
+    </div>
+
+	 <div class="modal fade in" id="changePmsData" table="-1" role="dialog" aria-labelledby="pmsModalLabel" aria-hidden="true" style="dispaly:none;top:20%">
+		  <div class="modal-dialog" role="document">
+			  <div class="modal-content">
+				  <div class="modal-header">
+					  <h4 class="modal-title">详情</h4>
+				  </div>
+          <div class="modal-body" style="height:300px">
+            <div class="text-center">
+              <input id="inputText" style="display:inline-block;height:40px;margin:5px;padding:5px;"/>
+              <button id="textClear" tpye="button" style="display:inline-block;height:40px;margin:5px;padding:5px;">清空</button>
+            </div>
+            <div style="text-align:center;position:relative;margin:10px;">
+              <div style="display:inline-block;position:absolute;top:10px;left:10px;">
+                <select id="leftSelect" multiple="multiple" style="height:200px;width:200px;padding:4px;"></select>
+              </div>
+              <div style="display:inline-block;text-align:center;position:absolute;top:36px;left:220px;">
+                <input id="right" tpye="button" value=">" class="turnIcon"/>
+                <input id="rightAll" tpye="button" value=">>>" class="turnIcon"/>
+                <input id="left" tpye="button" value="<" class="turnIcon"/>
+                <input id="leftAll" tpye="button" value="<<<" class="turnIcon"/>
+              </div>
+              <div style="display:inline-block;position:absolute;top:10px;left:300px;">
+                <select id="rightSelect" multiple="multiple" style="height:200px;width:200px;padding:4px;"></select>
+              </div>
+            </div>
+          </div>
+           <div class="modal-footer">
+					  <button class="btn-sm btn-default" data-dismiss="modal">关闭</button>
+					  <button class="btn-sm btn-primary" onClick="submit()">确认</button>
+				  </div>
+			  </div>
+		  </div>
+	  </div>
+		<div class="modal fade in" id="delPmsData" table="-1" role="dialog" aria-labelledby="delPmsModalLabel" aria-hidden="true" style="dispaly:none;top:20%">
+		  <div class="modal-dialog" role="document">
+			  <div class="modal-content">
+				  <div class="modal-header">
+					  <h4 class="modal-title">警告：</h4>
+				  </div>
+          <div class="modal-body">
+             <div style="margin:8px;text-align:center">
+                 <h3 id="delCheck"></h3>
+             </div>
+          </div>
+           <div class="modal-footer">
+					  <button class="btn-sm btn-default" data-dismiss="modal">关闭</button>
+					  <button class="btn-sm btn-primary" onClick="del()">确认</button>
+				  </div>
+			  </div>
+		  </div>
+	  </div>
+    <script>
+a();
+b();
+
+function a(){
+  console.log("a")
+  setTimeout(console.log("aa"), 5000)
+  setTimeout(console.log("aaa"), 0)
+  setTimeout(console.log("aaaa"), 1000)
+};
+function b(){
+  console.log("b")
+  setTimeout(console.log("bb"), 10)
+  setTimeout(console.log("bbb"), 0)
+  setTimeout(console.log("bbbb"), 2000)
+};
+        $(function () {
+
+            $('#tree_table').bootstrapTable({
+                class: 'table table-hover table-bordered',
+                // url:'data.json',
+                //contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+                data: detailData,
+                //sidePagination: 'server',
+                //pagination:true,
+				//pageSize:5,
+				//pageList:[5,10,20,30],
+                treeView: true,
+                treeId: "id",
+                treeField: "pmsType",
+                columns: [
+				{checkbox:true,valign:'middle',align:'center'},
+				{field:'pmsType',title:'名称',valign:"middle"},
+				{field:'levelLimit',title:'权限等级',valign:"middle"},
+				{field:'pmsDescribe',title:'权限使用人',valign:"middle"},
+				{field:'pmsOperate',title:'操作',valign:"middle",formatter:pmsOperate}
+                ]
+            });
+			function pmsOperate(value,field,index){
+				const str = ['<button class="btn-sm btn-primary" data-toggle="modal" data-target="#changePmsData" onClick="updatePms('+index+',\''+encodeURIComponent(JSON.stringify(field))+'\')">修改</button> <button class="btn-sm btn-primary" data-toggle="modal" data-target="#delPmsData" onClick="delPms('+index+',\''+encodeURIComponent(JSON.stringify(field))+'\')">删除</button>']
+				return str
+			}
+            $("#expandAllTree").on('click',function(){
+                $('#tree_table').bootstrapTable("expandAllTree")
+            })
+            $("#collapseAllTree").on('click',function(){
+                $('#tree_table').bootstrapTable("collapseAllTree")
+            })
+        });
+
+		var indexAgent = {rowIndex:0,rowData:{},leftList:[],rightList:[]}
+var allList = ["010","001","002","003","004","005"]
+var inputText = document.getElementById("inputText")
+
+function updatePms(index,row){
+  if(row){
+    let data = JSON.parse(decodeURIComponent(row))
+	debugger
+    delete indexAgent.rowIndex
+    indexAgent.rowIndex = index
+    delete indexAgent.rowData
+    indexAgent.rowData = data
+    let leftList = []
+    let rightList = []
+    if(leftList.length > 0){
+      leftList.splice(0,leftList.length)
+    }
+    if(rightList.length > 0){
+      rightList.splice(0,rightList.length)
+    }
+    leftList = leftList.concat(allList)
+    rightList = rightList.concat(data.pmsDescribe)
+    allList.forEach(function(x){
+      rightList.forEach(function(y){
+        if(x==y){
+          leftList.splice(leftList.indexOf(y),1)
+        }
+      })
+    })
+    loadBox(leftList,rightList)
+    delete indexAgent.leftList
+    indexAgent.leftList = leftList
+    delete indexAgent.rightList
+    indexAgent.rightList = rightList
+    inputText.addEventListener('input',function(){
+      var textWord = inputText.value
+      var reg = new RegExp(textWord)
+      var newLeft = fuzzyQuery(leftList,reg)
+      var newRight = fuzzyQuery(rightList,reg)
+      loadBox(newLeft,newRight)
+    })
+    $("#textClear").click(function(){
+      inputText.value = ""
+      loadBox(indexAgent.leftList,indexAgent.rightList)
+    })
+  }
+}
+
+$(function(){
+  $("#right").click(function(){
+    var vSelect = $("#leftSelect option:selected")
+    let moveItems = [].slice.call(vSelect)
+    moveItems.forEach(function(v){
+      let str = v.text
+      indexAgent.leftList.splice(indexAgent.leftList.indexOf(str),1)
+      indexAgent.rightList.push(str)
+    })
+    inputText.value = ""
+     loadBox(indexAgent.leftList,indexAgent.rightList)
+  })
+  $("#left").click(function(){
+    var vSelect = $("#rightSelect option:selected")
+    let moveItems = [].slice.call(vSelect)
+    moveItems.forEach(function(v){
+      let str = v.text
+      indexAgent.rightList.splice(indexAgent.leftList.indexOf(str),1)
+      indexAgent.leftList.push(str)
+    })
+    inputText.value = ""
+     loadBox(indexAgent.leftList,indexAgent.rightList)
+  })
+   $("#rightAll").click(function(){
+    $("#rightSelect").append($("#leftSelect>option"))
+    $("#leftSelect>option").remove()
+   })
+   $("#leftAll").click(function(){
+    $("#leftSelect").append($("#rightSelect>option"))
+    $("#rightSelect>option").remove()
+   })
+})
+function submit(){
+  let list = []
+  if(list.length > 0){
+    list.splice(0,list.length)
+  }
+  $("#rightSelect option").each(function(index,value){
+      list.push($(this).text())
+  })
+  let row = indexAgent.rowData
+  delete row.pmsDescribe
+  row.pmsDescribe = list
+  inputText.value = ""
+  detailData.splice(indexAgent.rowIndex,1,row)
+  //$("#tree_table").bootstrapTable('resetView');
+  //$("#tree_table").bootstrapTable('refresh');
+  //$("#tree_table").bootstrapTable('load',detailData)
+  $("#tree_table").bootstrapTable('updateRow',{index:indexAgent.rowIndex,row:row});
+  debugger
+  $("#changePmsData").modal("hide")
+}
+
+function loadBox(leftList,rightList){
+  if($("#leftSelect").length > 0){
+    $("#leftSelect option").remove()
+  }
+  for(let a of leftList){
+    $("#leftSelect").append("<option value='"+a+"'>"+a+"</option>")
+  }
+  if($("#rightSelect").length > 0){
+    $("#rightSelect option").remove()
+  }
+  for(let b of rightList){
+    $("#rightSelect").append("<option value='"+b+"'>"+b+"</option>")
+  }
+}
+function fuzzyQuery(list,reg){
+  var arr = []
+  list.forEach(function(v){
+    if(v.match(reg)){
+      arr.push(v)
+    }
+  })
+  return arr
+}
+
+var delPid = {rowIndex:0,rowData:{}}
+function delPms(index,row){
+  let data = JSON.parse(decodeURIComponent(row))
+  let str = data.id
+  delete delPid.rowIndex
+  delPid.rowIndex = index
+  delete delPid.rowData
+  delPid.rowData = data
+  if($("#delCheck").innerTxet != ""){
+    $("#delCheck").empty()
+  }
+  $("#delCheck").append("是否确定删除"+str+"所有信息？")
+}
+function del(){
+  detailData.splice(delPid.rowIndex,1)
+  $("#tree_table").bootstrapTable('load',detailData)
+  //$("#tree_table").bootstrapTable('updateRow',{index:delPid.rowIndex,row:delPid.rowData});
+  //$("#tree_table").bootstrapTable('resetView');
+  //$("#tree_table").bootstrapTable('refresh');
+  $("#delPmsData").modal("hide")
+}
+
+		var detailData = [
+                {
+                    id: '1',
+                    parentId:null,
+                    pmsType: "aa",
+                    levelLimit: "1",
+                    pmsDescribe: ["001","002","003","004","005"],
+                },{
+                    id: '11',
+                    parentId:'1',
+                    pmsType: "aa_sub1",
+                    levelLimit: "1",
+                    pmsDescribe: ["001","002","004","005"],
+                },{
+                    id: '111',
+                    parentId:'11',
+                    pmsType: "aa_sub1_sub2",
+                    levelLimit: "1",
+                    pmsDescribe: ["001","004"] ,
+                },{
+                    id: '2',
+                    parentId:null,
+                    pmsType: "bb",
+                    levelLimit: "1",
+                    pmsDescribe: ["001","002","003","004","005"],
+                },{
+                    id: '22',
+                    parentId:'2',
+                    pmsType: "bb_sub1",
+                    levelLimit: "1",
+                    pmsDescribe: ["001","002","003","004"],
+                },{
+                    id: '23',
+                    parentId:'2',
+                    pmsType: "bb_sub2",
+                    levelLimit: "1",
+                    pmsDescribe:["001","002","003","004"],
+                },{
+                    id: '233',
+                    parentId:'23',
+                    pmsType: "bb_sub2_sub2",
+                    levelLimit: "1",
+                    pmsDescribe: ["001","002","003"],
+                },{
+                    id: '2333',
+                    parentId:'233',
+                    pmsType: "bb_sub2_sub2_sub2",
+                    levelLimit: "1",
+                    pmsDescribe: ["001","003"],
+                },{
+                    id: '23333',
+                    parentId:'233',
+                    pmsType: "bb_sub2_sub2_sub23",
+                    levelLimit: "1",
+                    pmsDescribe: ["001"],
+                },{
+                    id: '233333',
+                    parentId:'233',
+                    pmsType: "bb_sub2_sub2_sub233",
+                    levelLimit: "1",
+                    pmsDescribe: ["001"],
+                },{
+                    id: '24',
+                    parentId:'2',
+                    pmsType: "bb_sub3",
+                    levelLimit: "1",
+                    pmsDescribe: ["001","002","003"],
+                }
+            ]
+    </script>
+</body>
+
+</html>

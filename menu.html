@@ -1,0 +1,664 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title> menu </title>
+    <link href="./lib/animate.css" rel="stylesheet">
+    <link href="./lib/bootstrap.min.css" rel="stylesheet">
+    <link href="./lib/bootstrap-table.min.css" rel="stylesheet">
+    <style>
+        .header {
+            height: 60px;
+            line-height: 60px;
+            font-size: 16px;
+        }
+
+        .container {
+            position: relative;
+            margin: 4px auto;
+            width: 100%;
+        }
+
+        .toolBox button {
+            margin: 8px;
+            display: inline-block;
+            text-align: center;
+            min-width: 60px;
+        }
+
+        .fixed-table-container {
+            height: 600px;
+            margin: 2px;
+            text-align: center
+        }
+
+        .modalStyle {
+            display: none;
+            top: 20px
+        }
+    </style>
+</head>
+<body>
+
+<div class='container'>
+    <div style="position:absolute;padding:4px;width:24%;top:1%;left:1%;">
+        <div class="row">
+            <button
+                    class="btn btn-primary col-lg-6"
+                    data-toggle="modal"
+                    data-target="#addMainData"
+                    style="text-align:center;margin:8px"
+                    onClick="clearAddInfo()">
+                新增主菜单
+            </button>
+            <button
+                    class="btn btn-primary col-lg-6"
+                    data-toggle="modal"
+                    data-target="#delMainData"
+                    style="text-align:center;margin:8px"
+                    onClick="clearAddInfo()">
+                删除选定主菜单
+            </button>
+        </div>
+        <div id="treeview"></div>
+    </div>
+    <div style="position: absolute;padding:4px;width:72%;top:1%;left:25%;">
+        <div class="toolBox">
+            <button class="btn-sm btn-primary" onclick="save()"> 保存</button>
+            <button id="addBtn"
+                    class="btn-sm btn-success"
+                    data-toggle="modal"
+                    data-target="#addData"
+                    onclick="clearAddInfo()">
+                新增子菜单
+            </button>
+        </div>
+        <div id=" contentDiv" class="content" style="margin:0 auto;padding:4px;">
+            <h2 style="text-align:center"></h2>
+            <table id="contentTable" class="table table-hover table-bordered"></table>
+        </div>
+    </div>
+</div>
+
+<!--修改单条菜单信息-->
+<div class=" modal fade in modalStyle" id="editData"
+     table="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header ">
+                <h4 class="modal-title">修改</h4></div>
+            <div class="modal-body">
+                <table class="table table-striped table-border table-condensed">
+                    <thead>
+                    <tr>
+                        <th class="table-th">属性</th>
+                        <th class="table-th">值(注：带有<span style="color:red"> * </span>为必填项</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th class="table-th"><span style=" color:red">*</span>MENUID 菜单id</th>
+                        <th><input id="fixMENUID" type="text" class="form-control"/></th>
+                    </tr>
+                    <tr>
+                        <th class="table-th"><span style="color:red"> *</span>MENUMC 菜单名称</th>
+                        <th><input id="fixMENUMC" type="text" class="form-control"/></th>
+                    </tr>
+                    <tr>
+                        <th class="table-th">MENUURL 路径</th>
+                        <th><input id="fixMENUURL" type="text" class="form-control"/></th>
+                    </tr>
+                    <tr>
+                        <th class="table-th">OPEN-URL 开放路径</th>
+                        <th><input id="fixOPEN-URL" type=" text" class=" form-control"/></th>
+                    </tr>
+                    <tr>
+                        <th class="table-th">XH 序号</th>
+                        <th><input id="fixXH" type="text" class="form-control"/></th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class='modal-footer'>
+                <button class="btn-sm btn-default" data-dismiss="modal" onclick="clearAddInfo()">关闭</button>
+                <button class="btn-sm btn-primary" onClick="changeDataSubmit()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--新增主菜单-->
+<div class=" modal fade in modalStyle" id="addMainData"
+     table="-1" role="dialog" aria-labelledby="mainModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header ">
+                <h4 class="modal-title">新增主菜单：</h4></div>
+            <div class="modal-body">
+                <table class="table table-striped table border table-condensed">
+                    <thead>
+                    <tr>
+                        <th class="table-th">属性</th>
+                        <th class="table-th">值(注：带有<span style="color:red"> * </span>为必填项</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th class="table-th"><span style=" color:red">*</span>MENUID 菜单id</th>
+                        <th><input id="mainMENUID" type="text" class="form-control"/></th>
+                    </tr>
+                    <tr>
+                        <th class="table-th"><span style="color:red">*</span>MENUMC 菜单名称</th>
+                        <th><input id="mainMENUMC" type="text" class="form-control"/></th>
+                    </tr>
+                    <tr>
+                        <th class="table-th">XH 序号</th>
+                        <th><input id="mainXH" type="text" class="form-control"/></th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class='modal-footer'>
+                <button class="btn-sm btn-default" data-dismiss="modal" onclick="clearAddInfo()">关闭</button>
+                <button class="btn-sm btn-primary" onClick="submitAddMain()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--新增子菜单-->
+<div class=" modal fade in modalStyle" id="addData"
+     table="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header ">
+                <h4 class="modal-title">新增</h4></div>
+            <div class="modal-body">
+                <table class="table table-striped table-border table-condensed">
+                    <thead>
+                    <tr>
+                        <th class="table-th">属性</th>
+                        <th class="table-th">值(注：带有<span style="color:red"> * </span>为必填项</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th class="table-th"><span style=" color:red">*</span>MENUID 菜单id</th>
+                        <th><input id="addMENUID" type="text" class="form-control"/></th>
+                    </tr>
+                    <tr>
+                        <th class="table-th"><span style="color:red"> *</span>MENUMC 菜单名称</th>
+                        <th><input id="addMENUMC" type="text" class="form-control"/></th>
+                    </tr>
+                    <tr>
+                        <th class="table-th">MENUURL 菜单url</th>
+                        <th><input id="addMENUURL" type="text" class="form-control"/></th>
+                    </tr>
+                    <tr>
+                        <th class="table-th">OPEN-URL</th>
+                        <th><input id="addOPEN-URL" type=" text" class=" form-control"/></th>
+                    </tr>
+                    <tr>
+                        <th class="table-th">XH 序号</th>
+                        <th><input id="addXH" type="text" class="form-control"/></th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class='modal-footer'>
+                <button class="btn-sm btn-default" data-dismiss="modal" onclick="clearAddInfo()">关闭</button>
+                <button class="btn-sm btn-primary" onClick="submitAdd()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--删除弹出确认框-->
+<div class=" modal fade in modalStyle" id="delData"
+     table="-1" role="dialog" aria-labelledby="delSonModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header ">
+                <h4 class="modal-title">警告：</h4>
+            </div>
+            <div class="modal-body">
+                <div style="margin:8px;text-align:center">
+                    <h3>是否确定删除？</h3>
+                </div>
+            </div>
+            <div class='modal-footer'>
+                <button class="btn-sm btn-default" data-dismiss="modal">关闭</button>
+                <button class="btn-sm btn-primary" onClick="submitDelSon()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--删除主菜单弹出确认框-->
+<div class=" modal fade in modalStyle" id="delMainData"
+     table="-1" role="dialog" aria-labelledby="delMainModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header ">
+                <h4 class="modal-title">警告：</h4>
+            </div>
+            <div class="modal-body">
+                <div style="margin:8px;text-align:center">
+                    <h3>是否确定删除？</h3>
+                </div>
+            </div>
+            <div class='modal-footer'>
+                <button class="btn-sm btn-default" data-dismiss="modal">关闭</button>
+                <button class="btn-sm btn-primary" onClick="submitDelMain()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript" src="./lib/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="./lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="./lib/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="./lib/bootstrap-treeview.min.js"></script>
+<script>
+  $('#addBtn').hide()
+  var agentData = { oldAllData: [], newAllData: [], rowClickIndex: 0, rowClickData: {}, clickNodes: [], addData: [] }
+  $(function () {
+    $.post('./json/menu.json', function (data) {
+      if (data) {
+        delete agentData.oldAllData
+        agentData.oldAllData = data
+        delete agentData.newAllData
+        agentData.newAllData = deepCopy(data)
+        updateTreeView(agentData.newAllData)
+      }
+    })
+    setMenuClick()
+  })
+
+//   function setMenuClick() {
+//     $('img[src$=tv_NoExpend.jpg]').each(function ()//筛选出所有的父级node
+//     {
+// //ctl00_body__menuTreet4i//父级node的id是这样的规则:ctl00_body__menuTreet加id加i
+//       var id = $(this).parent().attr("id").replace("ctl00_body__menuTreet", "").replace("i", "");
+//       var nId = 'ctl00_body__menuTreen' + id;
+//       BindExpandJs($("#ctl00_body__menuTreet" + id + "i"), nId);//给‘文件夹'图片绑定事件
+//       BindExpandJs($("#ctl00_body__menuTreet" + id), nId); //给'文本节点'绑定事件 });
+//     });
+//
+//     function BindExpandJs (obj, nId) {
+//       $(obj)
+//         .css("cursor", "pointer")
+//         .removeAttr("href")
+//         .click(function () {
+//           TreeView_ToggleNode(ctl00_body__menuTree_Data, 0, document.getElementById(nId), ' ', document.getElementById(nId + 'Nodes'));
+//         });
+//     }
+//   }
+
+  /**
+   *    更新TreeView
+   * */
+  function updateTreeView (arr) {
+    let options = {
+      levels: 1,
+      text: '',
+      data: arr
+    }
+    $('#treeview').treeview(options)
+    $('#treeview').on('nodeSelected', function (event, data) {
+      if (data) {
+        loadOtherTable(event, data)
+      }
+    })
+  }
+
+  /**
+   *   展开treeview
+   */
+  function expandNode(nodeId){
+    $('#treeview').treeview('expandNode', [nodeId, {
+      levels: 1,
+      silent:true
+    }])
+  }
+
+  /**
+   *   收缩treeview
+   */
+  function collapseNode(nodeId){
+    $('#treeview').treeview('collapseNode', [nodeId, {
+      ignoreChildren: false ,
+      silent:true
+    }])
+  }
+
+  /**
+   *    TreeView 条目所获取的数据和点击事件
+   * */
+  function loadOtherTable (event, data) {
+    $('#addBtn').show()
+    delete agentData.rowClickData
+    agentData.rowClickData = data
+    delTable ()
+    if (!data.nodes) {
+      agentData.rowClickData['sonMenu'] = []
+      agentData.rowClickData['nodes'] = []
+    }
+    delete agentData.clickNodes
+    agentData.clickNodes = data.nodes
+    $('#contentTable').bootstrapTable({
+      // url:'data.json',
+      //contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+      data: agentData.clickNodes,
+      //sidePagination: 'server',
+      pagination: true,
+      pageSize: 5,
+      pageList: [5, 10, 20, 30],
+      clickToSelect: false,
+      columns: [
+        { field: 'text', title: '名称', valign: 'middle' },
+        { field: 'MENUID', title: '菜单id', valign: 'middle' },
+        { field: 'MENUURL', title: '路径', valign: 'middle' },
+        { field: 'OPEN-URL', title: '开放路径', valign: 'middle' },
+        { field: 'XH', title: '序号', valign: 'middle' },
+        { field: 'sonOperate', title: '操作', valign: 'middle', formatter: sonOperate }
+      ]
+    })
+
+    function sonOperate (field, value, index) {
+      let str = ['<button class="btn-sm btn-primary"' +
+      ' data-toggle="modal" data-target="#editData"' +
+      ' onClick="updateSon(' + index + ',\'' + encodeURIComponent(JSON.stringify(value)) + '\')">' +
+      '修改</button> <button class="btn-sm btn-primary"' +
+      ' data-toggle="modal" data-target="#delData" ' +
+      'onClick="delSon(' + index + ',\'' + encodeURIComponent(JSON.stringify(value)) + '\')">' +
+      '删除</button>']
+      return str
+    }
+  }
+
+  function delTable () {
+    let table = $('#contentTable')
+    if (table) {
+      table.bootstrapTable('removeAll')
+      table.bootstrapTable('destroy')
+    }
+  }
+
+  /**
+   *   删除主菜单
+   * */
+  function submitDelMain () {
+    let allData = agentData.newAllData
+    let clickData = agentData.rowClickData
+    for (let item of allData) {
+      if (item.MENUID === clickData.MENUID){
+        allData.splice(allData.indexOf(clickData),1)
+      }
+    }
+    updateTreeView(allData)
+    delTable ()
+    $('#delMainData').modal('hide')
+  }
+
+  function save () {
+    let allData = agentData.newAllData
+    for (let key of allData) {
+      if (key.text) {
+        delete key.text
+      }
+      if (key.nodes) {
+        delete key.nodes
+      }
+    }
+    alert('返回总的数据allData即可')
+  }
+
+  /**
+   *  为满足treeview数据格式要求，深度遍历，并添加nodes和text字段
+   * @param obj 对象或者数组
+   */
+  function deepCopy (obj) {
+    let result = Array.isArray(obj) ? [] : {}
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        if (typeof obj[key] === 'object') {
+          result[key] = deepCopy(obj[key])
+          if (key === 'sonMenu') {
+            result.nodes = result[key]
+          }
+        } else {
+          result[key] = obj[key]
+          if (key === 'MENUMC') {
+            result.text = result[key]
+          }
+        }
+      }
+    }
+    return result
+  }
+
+  /**
+   * 判空
+   * @param str string字段
+   * @returns {boolean} 是否是空
+   */
+  function isEmpty (str) {
+    if (str === '' || str === null || str === undefined) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  /**
+   * 清空输入框
+   */
+  function clearAddInfo () {
+    $('#addMENUID').val('')
+    $('#addMENUMC').val('')
+    $('#addMENUURL').val('')
+    $('#addOPEN-URL').val('')
+    $('#addXH').val('')
+    $('#fixMENUID').val('')
+    $('#fixMENUMC').val('')
+    $('#fixMENUURL').val('')
+    $('#fixOPEN-URL').val('')
+    $('#fixXH').val('')
+    $('#mainMENUID').val('')
+    $('#mainXH').val('')
+    $('#mainMENUMC').val('')
+  }
+
+  /**
+   * 删除单条数据
+   */
+  var delOneLine = { index: 0, clickLine: {} }
+
+  function delSon (index, row) {
+    if (row) {
+      let data = JSON.parse(decodeURIComponent(row))
+      delete delOneLine.index
+      delOneLine.index = index
+      delete delOneLine.clickLine
+      delOneLine.clickLine = data
+    }
+  }
+
+  /**
+   * 确认删除数据
+   */
+  function submitDelSon () {
+    agentData.clickNodes.splice(delOneLine.index, 1)
+    $('#contentTable').bootstrapTable('load', agentData.clickNodes)
+    $('#delData').modal('hide')
+    // todo:更新TreeView
+    let treeViewData = agentData.newAllData
+    let delId = delOneLine.clickLine.PMENUID
+    let index = delOneLine.index
+    delJsonItem(treeViewData, delId, index)
+    updateTreeView(treeViewData)
+  }
+
+  /**
+   * 遍历总数据，通过 父id 删除对应的 id 所在行数据
+   * @param arr 总数据
+   * @param id 关键字段
+   * @param index 对应删除的索引
+   * @returns {*} 删除对应数据后的新总数据
+   */
+  function delJsonItem (arr, id, index) {
+    for (let key of arr) {
+      if (key.MENUID === id) {
+        key.nodes.splice(index, 1)
+      }
+      if (key.nodes) {
+        delJsonItem(key.nodes, id, index)
+      }
+    }
+    return arr
+  }
+
+</script>
+<script>
+  // 修改数据项
+  var updateSonData = { updateIndex: 0, oldObj: {}, newObj: {}, updateArr: [] }
+
+  function updateSon (index, value) {
+    if (value) {
+      clearAddInfo()
+      let data = JSON.parse(decodeURIComponent(value))
+      delete updateSonData.updateIndex
+      updateSonData.updateIndex = index
+      delete updateSonData.oldObj
+      updateSonData.oldObj = data
+      for (let item in data) {
+        if (item === 'MENUID') {
+          $('#fixMENUID').val(data[item])
+        }
+        if (item === 'MENUMC') {
+          $('#fixMENUMC').val(data[item])
+        }
+        if (item === 'MENUURL') {
+          $('#fixMENUURL').val(data[item])
+        }
+        if (item === 'OPEN_URL') {
+          $('#fixOPEN_URL').val(data[item])
+        }
+        if (item === 'XH') {
+          $('#fixXH').val(data[item])
+        }
+      }
+    }
+  }
+
+  /**
+   * 确认修改子数据项
+   */
+  function changeDataSubmit () {
+    if (isEmpty($('#fixMENUID')) || isEmpty($('#fixMENUMC'))) {
+      return
+    } else {
+      let obj = {}
+      obj['MENUID'] = $('#fixMENUID').val()
+      obj.text = $('#fixMENUMC').val()
+      obj['MENUMC'] = $('#fixMENUMC').val()
+      obj['MENUURL'] = $('#fixMENUURL').val()
+      obj['OPEN_URL'] = $('#fixOPEN_URL').val()
+      obj['XH'] = $('#fixXH').val()
+      obj['PMENUID'] = updateSonData.oldObj.PMENUID
+      delete updateSonData.newObj
+      updateSonData.newObj = obj
+      $('#contentTable').bootstrapTable('updateRow', {
+        index: updateSonData.updateIndex,
+        row: updateSonData.newObj
+      })
+      $('#editData').modal('hide')
+    }
+  }
+
+</script>
+<script>
+  // 增加子菜单数据
+  function submitAdd () {
+    let obj = {}
+    if (isEmpty($('#addMENUID').val()) || isEmpty($('#addMENUMC').val())) {
+      return
+    } else {
+      obj['MENUID'] = $('#addMENUID').val()
+      obj['MENUMC'] = $('#addMENUMC').val()
+      obj.text = $('#addMENUMC').val()
+      obj['PMENUID'] = agentData.rowClickData.MENUID
+      obj['OPEN_URL'] = $('#addMENUID').val()
+      obj['MENUURL'] = $('#addMENUURL').val()
+      obj['XH'] = $('#addXH').val()
+    }
+    agentData.clickNodes.push(obj)
+    delete updateSonData.newObj
+    updateSonData.newObj = obj
+    $('#contentTable').bootstrapTable('load', agentData.clickNodes)
+    $('#addData').modal('hide')
+    clearAddInfo()
+    // 更新TreeView
+    let allData = agentData.newAllData
+    let stringId = agentData.rowClickData.MENUID
+    delete updateSonData.updateArr
+    updateSonData.updateArr = []
+    let aa = objToArray(allData, stringId)
+    let newArr = aa.filter(value => value.PMENUID === '0')
+    delete agentData.newAllData
+    agentData.newAllData = newArr
+    updateTreeView(newArr)
+
+  }
+
+  /**
+   * 深度遍历，判断新增数据所在层级，更新总数据
+   * @param data 所有数据（agentData.newArrData）
+   * @param id menuId
+   * @returns {Array} 返回平级数组（有重复）
+   */
+  function objToArray (data, id) {
+    for (let key of data) {
+      if (key.MENUID) {
+        if (key.MENUID === id) {
+          if (!key.nodes) {
+            key.nodes = []
+          }
+          key.nodes.push(updateSonData.newObj)
+        }
+        updateSonData.updateArr.push(key)
+        if (key.nodes) {
+          objToArray(key.nodes, id)
+        }
+      }
+    }
+    return updateSonData.updateArr
+  }
+
+  /**
+   * 确认新增主菜单项
+   */
+  function submitAddMain () {
+    let obj = {}
+    if (isEmpty($('#mainMENUID').val()) || isEmpty($('#mainMENUMC').val())) {
+      return
+    } else {
+      obj['MENUID'] = $('#mainMENUID').val()
+      obj['MENUMC'] = $('#mainMENUMC').val()
+      obj.text = $('#mainMENUMC').val()
+      obj['PMENUID'] = '0'
+      obj['sonMenu'] = []
+      obj['nodes'] = []
+      agentData.newAllData.push(obj)
+      updateTreeView(agentData.newAllData)
+      clearAddInfo()
+    }
+    $('#addMainData').modal('hide')
+  }
+</script>
+<script type="text/javascript">
+
+</script>
+</html>
