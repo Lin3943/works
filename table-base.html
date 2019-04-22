@@ -27,26 +27,18 @@
   </head>
   <body>
 	 <div class="container">
-		  <div id="btn-pms" class="text-center header">权限管理</div>
+		  <div class="text-center header">权限管理</div>
 		  <div id="btn-pms" class="text-center header">
 			  <button class="btn-sm btn-primary" style="margin: 1% 1% 1% 90%;" onclick="createNew()">新增</button>
 		  </div>
 		  <div id="permission" style="margin: 1%;">
 			  <table id="pmsTable" class="table table-hover">
-				  <thead>
-					  <tr>
-						  <th data-field="select"></th>
-						  <th data-field="pid"></th>
-						  <th data-field="pmsType"></th>
-						  <th data-field="levelLimit"></th>
-						  <th data-field="pmsDescribe"></th>
-						  <th data-field="pmsOperate"></th>
-					  </tr>
-				  </thead>
 			  </table>
 		  </div>
 	  </div>
-	  <div class="modal fade in" id="changePmsData" table="-1" role="dialog" aria-labelledby="pmsModalLabel" aria-hidden="true" style="dispaly:none;top:20%">
+	  <div class="modal fade in" id="changePmsData"
+		   table="-1" role="dialog" aria-labelledby="pmsModalLabel"
+		   aria-hidden="true" style="display:none;top:20%">
 		  <div class="modal-dialog" role="document">
 			  <div class="modal-content">
 				  <div class="modal-header">
@@ -55,17 +47,19 @@
           <div class="modal-body" style="height:300px">
             <div class="text-center">
               <input id="inputText" style="display:inline-block;height:40px;margin:5px;padding:5px;"/>
-              <button id="textClear" tpye="button" style="display:inline-block;height:40px;margin:5px;padding:5px;">清空</button>
+              <button id="textClear" type="button"
+					  style="display:inline-block;height:40px;margin:5px;padding:5px;">清空</button>
             </div>
             <div style="text-align:center;position:relative;margin:10px;">
               <div style="display:inline-block;position:absolute;top:10px;left:10px;">
-                <select id="leftSelect" multiple="multiple" style="height:200px;width:200px;padding:4px;"></select>
+                <select id="leftSelect" multiple="multiple"
+						style="height:200px;width:200px;padding:4px;"></select>
               </div>
               <div style="display:inline-block;text-align:center;position:absolute;top:36px;left:220px;">
-                <input id="right" tpye="button" value=">" class="turnIcon"/>
-                <input id="rightAll" tpye="button" value=">>>" class="turnIcon"/>
-                <input id="left" tpye="button" value="<" class="turnIcon"/>
-                <input id="leftAll" tpye="button" value="<<<" class="turnIcon"/>
+                <input id="right" type="button" value=">" class="turnIcon"/>
+                <input id="rightAll" type="button" value=">>>" class="turnIcon"/>
+                <input id="left" type="button" value="<" class="turnIcon"/>
+                <input id="leftAll" type="button" value="<<<" class="turnIcon"/>
               </div>
               <div style="display:inline-block;position:absolute;top:10px;left:300px;">
                 <select id="rightSelect" multiple="multiple" style="height:200px;width:200px;padding:4px;"></select>
@@ -74,12 +68,14 @@
           </div>
            <div class="modal-footer">
 					  <button class="btn-sm btn-default" data-dismiss="modal">关闭</button>
-					  <button class="btn-sm btn-primary" onClick="submit()"=>确认</button>
+					  <button class="btn-sm btn-primary" onClick="submit()">确认</button>
 				  </div>
 			  </div>
 		  </div>
 	  </div>
-		<div class="modal fade in" id="delPmsData" table="-1" role="dialog" aria-labelledby="delPmsModalLabel" aria-hidden="true" style="dispaly:none;top:20%">
+		<div class="modal fade in" id="delPmsData"
+			 table="-1" role="dialog" aria-labelledby="delPmsModalLabel"
+			 aria-hidden="true" style="display:none;top:20%">
 		  <div class="modal-dialog" role="document">
 			  <div class="modal-content">
 				  <div class="modal-header">
@@ -92,19 +88,18 @@
           </div>
            <div class="modal-footer">
 					  <button class="btn-sm btn-default" data-dismiss="modal">关闭</button>
-					  <button class="btn-sm btn-primary" onClick="del()"=>确认</button>
+					  <button class="btn-sm btn-primary" onClick="del()">确认</button>
 				  </div>
 			  </div>
 		  </div>
 	  </div>
   </body>
-  <script type="text/javascript" src="D:/desktop/lib/jquery-3.3.1.js"></script> 
-  <script type="text/javascript" src="D:\desktop\lib\bootstrap.min.js"></script>
-  <script type="text/javascript" src="D:/desktop/lib/bootstrap-table.min.js"></script> 
-  <script src="https://cdn.bootcss.com/bootstrap-table/1.12.0/extensions/treegrid/bootstrap-table-treegrid.js"></script> 
+  <script type="text/javascript" src="./lib/jquery-3.3.1.js"></script>
+  <script type="text/javascript" src="./lib/bootstrap.min.js"></script>
+  <script type="text/javascript" src="./lib/bootstrap-table.min.js"></script>
    <script>
-	
-var detailData = [
+
+let detailData = [
   {pid:"01",pmsType:"菜单修改",levelLimit:"3",pmsDescribe:["001","002","003"]},
   {pid:"02",pmsType:"人员管理",levelLimit:"4",pmsDescribe:["001","002","003","004"]},
   {pid:"03",pmsType:"修改密码",levelLimit:"1",pmsDescribe:["001"]},
@@ -114,21 +109,21 @@ var detailData = [
 
 $("#pmsTable").bootstrapTable({
   data:detailData,
-  dataType:Array,
+  // dataType:Array,
   striped:true,
   pageNumber:1,
   pagination:true,
   pageSize:10,
-  pageList:[10,20,30],
+  pageList:[5,15,30],
   columns:[
-    {title:"全选",filed:"select",valign:"middle",sortable:false,visible:true,width:25,checkbox:true},
-    {title:"pid",filed:"pid",valign:"middle",sortable:true,visible:true,align:"center"},
-    {title:"权限类型",filed:"pmsType",valign:"middle",sortable:false,visible:true,align:"center"},
-    {title:"权限等级",filed:"levelLimit",valign:"middle",sortable:false,visible:true,align:"center"},
-    {title:"权限使用人",filed:"pmsDescribe",valign:"middle",sortable:false,visible:true,align:"center"},
-    {title:"操作",filed:"pmsOperate",valign:"middle",formatter:pmsOperate,visible:true,align:"center"},
+    {title:"全选",field:"select",align:"center",sortable:false,visible:true,width:25,checkbox:true},
+    {title:"pid",field:"pid",valign:"middle",sortable:true,visible:true,align:"center"},
+    {title:"权限类型",field:"pmsType",valign:"middle",sortable:false,visible:true,align:"center"},
+    {title:"权限等级",field:"levelLimit",valign:"middle",sortable:false,visible:true,align:"center"},
+    {title:"权限使用人",field:"pmsDescribe",valign:"middle",sortable:false,visible:true,align:"center"},
+    {title:"操作",field:"pmsOperate",valign:"middle",formatter:pmsOperate,visible:true,align:"center"},
   ],
-  showRefresh:false,
+  showRefresh:true,
 })
 
 function createNew(){
@@ -136,13 +131,13 @@ function createNew(){
 }
 
 function pmsOperate(value,field,index){
-  const str = ['<button class="btn-sm btn-primary" data-toggle="modal" data-target="#changePmsData" onClick="updatePms('+index+',\''+encodeURIComponent(JSON.stringify(field))+'\')">修改</button> <button class="btn-sm btn-primary" data-toggle="modal" data-target="#delPmsData" onClick="delPms('+index+',\''+encodeURIComponent(JSON.stringify(field))+'\')">删除</button>']
-  return str
+  return ['<button class="btn-sm btn-primary" data-toggle="modal" data-target="#changePmsData" onClick="updatePms('+index+',\''+encodeURIComponent(JSON.stringify(field))+'\')">修改</button> <button class="btn-sm btn-primary" data-toggle="modal" data-target="#delPmsData" onClick="delPms('+index+',\''+encodeURIComponent(JSON.stringify(field))+'\')">删除</button>']
+
 }
 
-var indexAgent = {rowIndex:0,rowData:{},leftList:[],rightList:[]}
-var allList = ["010","001","002","003","004","005"]
-var inputText = document.getElementById("inputText")
+let indexAgent = {rowIndex:0,rowData:{},leftList:[],rightList:[]}
+let allList = ["010","001","002","003","004","005"]
+let inputText = document.getElementById("inputText")
 
 function updatePms(index,row){
   if(row){
@@ -163,7 +158,7 @@ function updatePms(index,row){
     rightList = rightList.concat(data.pmsDescribe)
     allList.forEach(function(x){
       rightList.forEach(function(y){
-        if(x==y){
+        if(x === y){
           leftList.splice(leftList.indexOf(y),1)
         }
       })
@@ -174,10 +169,10 @@ function updatePms(index,row){
     delete indexAgent.rightList
     indexAgent.rightList = rightList
     inputText.addEventListener('input',function(){
-      var textWord = inputText.value
-      var reg = new RegExp(textWord)
-      var newLeft = fuzzyQuery(leftList,reg)
-      var newRight = fuzzyQuery(rightList,reg)
+      let textWord = inputText.value
+      let reg = new RegExp(textWord)
+      let newLeft = fuzzyQuery(leftList,reg)
+      let newRight = fuzzyQuery(rightList,reg)
       loadBox(newLeft,newRight)
     })
     $("#textClear").click(function(){
@@ -189,7 +184,7 @@ function updatePms(index,row){
 
 $(function(){
   $("#right").click(function(){
-    var vSelect = $("#leftSelect option:selected")
+    let vSelect = $("#leftSelect option:selected")
     let moveItems = [].slice.call(vSelect)
     moveItems.forEach(function(v){
       let str = v.text
@@ -200,7 +195,7 @@ $(function(){
      loadBox(indexAgent.leftList,indexAgent.rightList)
   })
   $("#left").click(function(){
-    var vSelect = $("#rightSelect option:selected")
+    let vSelect = $("#rightSelect option:selected")
     let moveItems = [].slice.call(vSelect)
     moveItems.forEach(function(v){
       let str = v.text
@@ -224,7 +219,7 @@ function submit(){
   if(list.length > 0){
     list.splice(0,list.length)
   }
-  $("#rightSelect option").each(function(index,value){
+  $("#rightSelect option").each(function(){
       list.push($(this).text())
   })
   let row = indexAgent.rowData
@@ -251,7 +246,7 @@ function loadBox(leftList,rightList){
   }
 }
 function fuzzyQuery(list,reg){
-  var arr = []
+  let arr = []
   list.forEach(function(v){
     if(v.match(reg)){
       arr.push(v)
@@ -260,7 +255,7 @@ function fuzzyQuery(list,reg){
   return arr
 }
 
-var delPid = {rowIndex:0,rowData:{}}
+let delPid = {rowIndex:0,rowData:{}}
 function delPms(index,row){
   let data = JSON.parse(decodeURIComponent(row))
   let str = data.pid
@@ -268,7 +263,7 @@ function delPms(index,row){
   delPid.rowIndex = index
   delete delPid.rowData
   delPid.rowData = data
-  if($("#delCheck").innerTxet != ""){
+  if($("#delCheck").innerText !== ""){
     $("#delCheck").empty()
   }
   $("#delCheck").append("是否确定删除"+str+"所有信息？")
