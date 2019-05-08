@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8"> 
+	<meta charset="utf-8">
 	<title>Bootstrap 实例 - 轮播（Carousel）插件方法</title>
 	<link href="./lib/bootstrap.min.css" rel="stylesheet">
-	
+
 </head>
 <body>
 	<script type="text/javascript" src="./lib/jquery-3.3.1.js"></script>
@@ -15,7 +15,7 @@
 		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 		<li data-target="#myCarousel" data-slide-to="1"></li>
 		<li data-target="#myCarousel" data-slide-to="2"></li>
-	</ol>   
+	</ol>
 
 	<!-- 轮播（Carousel）项目 -->
 	<div class="carousel-inner">
@@ -35,7 +35,7 @@
 	    <span class="sr-only">Previous</span>
 	</a>
 	<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-	    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+	    <span class="glyphicon glyphicon-chevron-right" aria-hidden="false"></span>
 	    <span class="sr-only">Next</span>
 	</a>
 </div>
@@ -54,7 +54,7 @@
 <script>
 	$(function(){
 		$('#myCarousel').carousel({interval:5000});
-		
+
 		// 初始化轮播
 		$(".start-slide").click(function(){
 			$("#myCarousel").carousel('cycle');
@@ -71,7 +71,7 @@
 		$(".next-slide").click(function(){
 			$("#myCarousel").carousel('next');
 		});
-		// 循环轮播到某个特定的帧 
+		// 循环轮播到某个特定的帧
 		$(".slide-one").click(function(){
 			$("#myCarousel").carousel(0);
 		});
