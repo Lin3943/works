@@ -28,16 +28,55 @@
     <!-- Google Font -->
     <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">-->
     <style>
-        .navbar-custom-menu img{
+        body {
+            color: white;
+        }
+
+        .logo {
+            color: white;
+            background-color: #152D65;
+        }
+
+        .navbar-custom-menu img {
             height: 16px;
             width: 16px;
         }
-        .navbar-custom-menu li{
+
+        .navbar-nav li span {
+            color: white;
+        }
+
+        .custom-menu-li :hover {
+            color: #152D65;
+        }
+
+        .navbar-custom-menu li {
             font-size: 16px;
+            color: white;
+        }
+
+        .iFrameSty {
+            width: 100%;
+            height: 87vh;
+            border: 1px solid red;
+            overflow: hidden;
+        }
+
+        .indexTitleSty {
+            font-size: 18px;
+            width: 60px;
+        }
+
+        .sideBodySty {
+            background: linear-gradient(#305694, #152D65);
+        }
+
+        .contentSty {
+            background: linear-gradient(to right, #305694, #152D65);
         }
     </style>
 </head>
-<body class="hold-transition skin-black sidebar-mini fixed">
+<body class="hold-transition sidebar-mini fixed">
 <div class="wrapper">
     <header class="main-header">
         <!-- Logo -->
@@ -53,13 +92,13 @@
         <nav class="navbar navbar-static-top">
             <!--&lt;!&ndash; Sidebar toggle button&ndash;&gt;-->
             <!--<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">-->
-                <!--<span class="sr-only">Toggle navigation</span>-->
+            <!--<span class="sr-only">Toggle navigation</span>-->
             <!--</a>-->
 
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <!-- Control Sidebar Toggle Button -->
-                    <li>
+                    <li class="custom-menu-li">
                         <a href="#">
                             <img src="../img/pwyx/shujuguanli_choice.png"/>
                             <span> 数据管理</span>
@@ -96,20 +135,19 @@
         </nav>
     </header>
     <!-- Left side column. contains the logo and sidebar -->
-    <aside class="main-sidebar">
+    <aside class="main-sidebar sideBodySty">
+        <div class="user-panel">
+            <div class="pull-left image">
+                <img src="../img/bishi.jpg" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-right info">
+                <p>Alexander Pierce</p>
+                <div>说明</div>
+            </div>
+        </div>
+        <div style="text-align: center;color: #0f0;">额外需求</div>
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-            <!-- Sidebar user panel -->
-            <div class="user-panel">
-                <div class="pull-left image">
-                    <img src="../img/bishi.jpg" class="img-circle" alt="User Image">
-                </div>
-                <div class="pull-right info">
-                    <p>Alexander Pierce</p>
-                    <div>说明</div>
-                </div>
-            </div>
-            <div style="text-align: center">额外需求</div>
             <!-- search form -->
             <!--<form action="#" method="get" class="sidebar-form">-->
             <!--<div class="input-group">-->
@@ -123,35 +161,37 @@
             <!--</form>-->
             <!-- /.search form -->
             <!-- sidebar menu: : style can be found in sidebar.less -->
+
             <ul class="sidebar-menu" data-widget="tree">
-                <li class="active treeview">
-                    <a href="#">
-                        <i class="fa fa-dashboard"></i>
-                        <span>主面板</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li class="active"><a href="#"><i class="fa fa-circle-o"></i> 子集菜单1</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> 子集菜单2</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-files-o"></i>
-                        <span>Test Options</span>
-                        <span class="pull-right-container">
-                            <span class="label label-primary pull-right">4</span>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-circle-o"></i> test1</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> test2</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> test3</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> test4</a></li>
-                    </ul>
-                </li>
+                <!--&lt;!&ndash;多级子菜单模型&ndash;&gt;-->
+                <!--<li class="active treeview">-->
+                <!--<a href="#">-->
+                <!--<i class="fa fa-dashboard"></i>-->
+                <!--<span>主面板</span>-->
+                <!--<span class="pull-right-container">-->
+                <!--<i class="fa fa-angle-left pull-right"></i>-->
+                <!--</span>-->
+                <!--</a>-->
+                <!--<ul class="treeview-menu">-->
+                <!--<li class="active"><a href="#"><i class="fa fa-circle-o"></i> 子集菜单1</a></li>-->
+                <!--<li><a href="#"><i class="fa fa-circle-o"></i> 子集菜单2</a></li>-->
+                <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="treeview">-->
+                <!--<a href="#">-->
+                <!--<i class="fa fa-files-o"></i>-->
+                <!--<span>Test Options</span>-->
+                <!--<span class="pull-right-container">-->
+                <!--<span class="label label-primary pull-right">4</span>-->
+                <!--</span>-->
+                <!--</a>-->
+                <!--<ul class="treeview-menu">-->
+                <!--<li><a href="#"><i class="fa fa-circle-o"></i> test1</a></li>-->
+                <!--<li><a href="#"><i class="fa fa-circle-o"></i> test2</a></li>-->
+                <!--<li><a href="#"><i class="fa fa-circle-o"></i> test3</a></li>-->
+                <!--<li><a href="#"><i class="fa fa-circle-o"></i> test4</a></li>-->
+                <!--</ul>-->
+                <!--</li>-->
                 <li>
                     <a href="#">
                         <i class="fa fa-th"></i> <span>Widgets</span>
@@ -162,29 +202,30 @@
                 </li>
                 <li><a href="#"><i class="fa fa-book"></i> <span>Documentation</span>
                 </a></li>
-                <!--<li class="header">LABELS</li>-->
-                <!--<li><a href="#">-->
-                    <!--<i class="fa fa-circle-o text-red"></i> <span>Important</span>-->
-                <!--</a></li>-->
-                <!--<li><a href="#">-->
-                    <!--<i class="fa fa-circle-o text-yellow"></i> <span>Warning</span>-->
-                <!--</a></li>-->
-                <!--<li><a href="#">-->
-                    <!--<i class="fa fa-circle-o text-aqua"></i> <span>Information</span>-->
-                <!--</a></li>-->
             </ul>
         </section>
         <!-- /.sidebar -->
+        <section class="sidebar hidden">
+
+            <ul class="sidebar-menu" data-widget="tree">
+                <li>
+                    <a href="#">
+                        <i class="fa fa-th"></i> <span>Widgets</span>
+                    </a>
+                </li>
+                <li><a href="#"><i class="fa fa-book"></i> <span>Documentation</span>
+                </a></li>
+            </ul>
+        </section>
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper contentSty">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>
-                面板标题
-                <small>可增加标签关闭设置</small>
-            </h1>
+            <div class="indexTitleSty" onclick="onIndexClick">
+                首页
+            </div>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Dashboard</li>
@@ -193,19 +234,18 @@
 
         <!-- Main content -->
         <section class="content">
-            这是主内容
-            <iframe></iframe>
+            <iframe class="iFrameSty"></iframe>
         </section>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-            <b>Version</b> 1.0.0
-        </div>
-        <strong>Copyright &copy; 2019-2024 .</strong> All rights
-        reserved.
-    </footer>
+    <!--<footer class="main-footer">-->
+    <!--<div class="pull-right hidden-xs">-->
+    <!--<b>Version</b> 1.0.0-->
+    <!--</div>-->
+    <!--<strong>Copyright &copy; 2019-2024 .</strong> All rights-->
+    <!--reserved.-->
+    <!--</footer>-->
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
@@ -258,5 +298,10 @@
 <script src="../js/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <!--<script src="../js/demo.js"></script>-->
+<script>
+  function onIndexClick () {
+
+  }
+</script>
 </body>
 </html>
