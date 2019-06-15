@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<link href="../lib/bootstrap.min.css" rel="stylesheet">
+<script src="../lib/jquery.min.js"></script>
+<script src="../lib/bootstrap.min.js"></script>
+<head>
+    <meta charset="utf-8"/>
+    <title>设备巡视</title>
+    <style>
+        .header {
+            display: flex;
+            background-color: #12A09D;
+            padding: 2rem;
+            align-items: center;
+            font-size: 4rem;
+            color: #fff;
+        }
+
+        .header-title {
+            height: 100%;
+            width: 100%;
+            background-color: #12A09D;
+            text-align: center;
+        }
+
+        .content {
+            margin: 3% 2%;
+        }
+
+        .footer {
+            position: fixed;
+            font-size: 5rem;
+            right: 0;
+            bottom: 0;
+        }
+
+        .bg-quadrant {
+
+            width: 8rem;
+            height: 8rem;
+            border-radius: 8rem 0 0 0;
+            background: chartreuse;
+        }
+
+        .spaceBlock {
+            width: 2rem;
+        }
+
+        .movedown {
+            padding: 40%;
+        }
+
+        .tzxx-main {
+            font-size: 4rem;
+        }
+
+        .tzxx-main-right {
+            font-size: 4rem;
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .blodTitle {
+            padding: 1.4rem 0;
+            font-weight: bold;
+            font-size: 4rem;
+            border-bottom: 1px solid lightgray;
+        }
+
+        .lightTitle {
+            padding: 1.4rem 0;
+            font-size: 3rem;
+            border-bottom: 1px solid lightgray;
+        }
+
+        .zywb-title {
+            border-bottom: 0;
+        }
+
+        .zywb-content {
+            height: 30rem;
+            font-weight: bold;
+            font-size: 4rem;
+            overflow-y: auto;
+        }
+
+        .deep-skyblue {
+            color: deepskyblue;
+        }
+
+        .add-pic-title {
+            margin: 1rem 0;
+            border-bottom: 0;
+            font-weight: normal;
+        }
+
+        .xsqd {
+            margin: 6rem 0;
+            font-size: 4rem;
+            border-radius: 1rem;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="spaceBlock">
+        <span class="glyphicon glyphicon-chevron-left" style="height: 100%;"></span>
+    </div>
+    <div class="header-title">
+        设备巡视
+    </div>
+    <div class="spaceBlock"></div>
+</div>
+<div class="content">
+    <div class="row lightTitle">
+        <div class="col-xs-6 tzxx-main">台账信息</div>
+        <div class="col-xs-6 tzxx-main-right">
+            <span class="glyphicon glyphicon-info-sign deep-skyblue"></span>
+        </div>
+    </div>
+    <div class="row blodTitle">
+        <div class="col-xs-6 tzxx-main">线路名称</div>
+        <div class="col-xs-6 tzxx-main-right">
+            青鸿线
+        </div>
+    </div>
+    <div class="row blodTitle">
+        <div class="col-xs-6 tzxx-main">运行编号</div>
+        <div class="col-xs-6 tzxx-main-right">
+            青鸿线#2
+        </div>
+    </div>
+    <div class="row blodTitle">
+        <div class="col-xs-6 tzxx-main">所属地市</div>
+        <div class="col-xs-6 tzxx-main-right">
+            国网泉州供电公司
+        </div>
+    </div>
+    <div class="zywb-main">
+        <div class="row lightTitle zywb-title">
+            <div class="col-xs-6 tzxx-main">作业文本</div>
+            <div class="col-xs-6 tzxx-main-right">
+                <span class="glyphicon glyphicon-info-sign deep-skyblue"></span>
+            </div>
+        </div>
+        <div class="zywb-content">
+            1、登杆塔前必须认塔前必须塔前必须塔前必须塔前必须塔前必须塔前必须塔前必须真...
+            1、登杆塔前必须认塔前必须塔前必须塔前必须塔前必须塔前必须塔前必须塔前必须真...
+            1、登杆塔前必须认塔前必须塔前必须塔前必须塔前必须塔前必须塔前必须塔前必须真...
+            1、登杆塔前必须认塔前必须塔前必须塔前必须塔前必须塔前必须塔前必须塔前必须真...
+            1、登杆塔前必须认塔前必须塔前必须塔前必须塔前必须塔前必须塔前必须塔前必须真...
+            1、登杆塔前必须认塔前必须塔前必须塔前必须塔前必须塔前必须塔前必须塔前必须真...
+            1、登杆塔前必须认塔前必须塔前必须塔前必须塔前必须塔前必须塔前必须塔前必须真...
+            1、登杆塔前必须认塔前必须塔前必须塔前必须塔前必须塔前必须塔前必须塔前必须真...
+            1、登杆塔前必须认塔前必须塔前必须塔前必须塔前必须塔前必须塔前必须塔前必须真...
+            1、登杆塔前必须认塔前必须塔前必须塔前必须塔前必须塔前必须塔前必须塔前必须真...
+            1、登杆塔前必须认塔前必须塔前必须塔前必须塔前必须塔前必须塔前必须塔前必须真...
+            1、登杆塔前必须认塔前必须塔前必须塔前必须塔前必须塔前必须塔前必须塔前必须真...
+        </div>
+    </div>
+
+    <div class="row blodTitle add-pic-title">
+        <div class="col-xs-1 tzxx-main btn-warning" style="text-align: center">
+            <span class="glyphicon glyphicon-warning-sign"></span>
+        </div>
+        <div class="col-xs-9 tzxx-main">设备缺陷列表</div>
+        <div class="col-xs-2 tzxx-main-right">
+            <span class="glyphicon glyphicon-plus-sign deep-skyblue"></span>
+            <span class="glyphicon glyphicon-chevron-right deep-skyblue"></span>
+        </div>
+    </div>
+
+    <div class="row blodTitle add-pic-title">
+        <div class="col-xs-1 tzxx-main btn-warning" style="text-align: center">
+            <span class="glyphicon glyphicon-warning-sign"></span>
+        </div>
+        <div class="col-xs-9 tzxx-main">标准化线路照片采集</div>
+        <div class="col-xs-2 tzxx-main-right">
+            <span class="glyphicon glyphicon-chevron-right deep-skyblue"></span>
+        </div>
+    </div>
+    <div class="btn btn-lg btn-primary btn-block xsqd">
+        巡视签到
+    </div>
+</div>
+<div class="footer">
+    <div class="quadrant">
+        <div class="bg-quadrant"><span class="glyphicon glyphicon-th-large movedown " style="color: #199560;"></span>
+        </div>
+    </div>
+</div>
+</body>
+</html>

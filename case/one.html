@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<link href="../lib/bootstrap.min.css" rel="stylesheet">
+<script src="../lib/jquery.min.js"></script>
+<script src="../lib/bootstrap.min.js"></script>
+<head>
+    <meta charset="utf-8"/>
+    <title>首页</title>
+    <style>
+        .header {
+            display: flex;
+            background-color: #12A09D;
+            padding: 2rem;
+            align-items: center;
+            font-size: 3rem;
+            color: #fff;
+        }
+
+        .header-title {
+            height: 100%;
+            width: 100%;
+            background-color: #12A09D;
+            text-align: center;
+        }
+
+        .content {
+            margin: 3% 2%;
+        }
+
+        .content-menu {
+            display: flex;
+            margin: 3% 1%;
+            border-radius: 1.16rem;
+            box-shadow: 0rem 0rem 0.5rem 0.5rem #efecec;
+            /*height: 16vh;*/
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 2%;
+        }
+
+        .content2 {
+            margin: 2% 1% 1% 1%;
+            border-radius: 1.16rem;
+            box-shadow: 0rem 0rem 0.5rem 0.5rem #efecec;
+            /*height: 12vh;*/
+            padding: 2%;
+        }
+
+        .menu {
+            display: flex;
+            width: 33.3%;
+            height: 50%;
+            justify-content: center;
+            align-items: center;
+            padding: 1%;
+        }
+
+        .menu-icon {
+            font-size: 5rem;
+        }
+
+        .menu-title {
+            font-size: 2.5rem;
+        }
+
+        .content2-title {
+            font-size: 3rem;
+            /*line-height: 4vh;*/
+            padding: 0rem 4rem;
+        }
+
+        .content2-contence2 {
+            display: flex;
+            /*height: 8vh;*/
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content-date {
+            font-size: 5rem;
+        }
+
+        .content-des {
+            font-size: 2.5rem;
+        }
+
+        .spaceDiv {
+            height: 3rem;
+            width: 2px;
+            margin-top: -3rem;
+            background-color: #a98d8d;
+        }
+
+        .footer {
+            position: fixed;
+            font-size: 5rem;
+            right: 0;
+            bottom: 0;
+        }
+
+        .bg-quadrant {
+
+            width: 8rem;
+            height: 8rem;
+            border-radius: 8rem 0 0 0;
+            background: chartreuse;
+        }
+
+        .spaceBlock {
+            width: 2rem;
+        }
+
+        .movedown {
+            padding: 40%;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="spaceBlock">
+        <span class="glyphicon glyphicon-chevron-left" style="height: 100%;"></span>
+    </div>
+    <div class="header-title">
+        首页
+    </div>
+    <div class="spaceBlock"></div>
+</div>
+<div class="content">
+    <div class="content-menu">
+        <div class="menu">
+            <div style="text-align: center;">
+                <div class="menu-icon">
+                    <span class="glyphicon glyphicon-music"></span>
+                </div>
+                <div class="menu-title">
+                    巡视任务
+                </div>
+            </div>
+        </div>
+        <div class="menu">
+            <div style="text-align: center;">
+                <div class="menu-icon">
+                    <span class="glyphicon glyphicon-list" style="color: rgb(255, 140, 60);"></span>
+                </div>
+                <div class="menu-title">
+                    周边
+                </div>
+            </div>
+        </div>
+        <div class="menu">
+            <div style="text-align: center;">
+                <div class="menu-icon">
+                    <span class="glyphicon glyphicon-list" style="color: #21c6c2"></span>
+                </div>
+                <div class="menu-title">
+                    台账管理
+                </div>
+            </div>
+        </div>
+        <div class="menu">
+            <div style="text-align: center;">
+                <div class="menu-icon">
+                    <span class="glyphicon glyphicon-music"></span>
+                </div>
+                <div class="menu-title">
+                    缺陷管理
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="content2">
+        <div class="content2-title">
+            年度统计
+        </div>
+        <div class="content2-contence2">
+            <div class="menu">
+                <div style="text-align: center;">
+                    <div class="content-date" style="color: blue;">
+                        0
+                    </div>
+                    <div class="content-des">
+                        巡视线路
+                    </div>
+                </div>
+            </div>
+            <div class="spaceDiv"></div>
+            <div class="menu">
+                <div style="text-align: center;">
+                    <div class="content-date" style="color: green;">
+                        0
+                    </div>
+                    <div class="content-des">
+                        巡视杆塔数
+                    </div>
+                </div>
+            </div>
+            <div class="spaceDiv"></div>
+            <div class="menu">
+                <div style="text-align: center;">
+                    <div class="content-date" style="color: red;">
+                        69
+                    </div>
+                    <div class="content-des">
+                        发现缺陷数
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="quadrant">
+        <div class="bg-quadrant"><span class="glyphicon glyphicon-th-large movedown " style="color: #199560;"></span>
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>
