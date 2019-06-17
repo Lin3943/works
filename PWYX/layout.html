@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Dashboard</title>
+    <title>国网电力</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -46,8 +46,46 @@
             color: white;
         }
 
-        .custom-menu-li :hover {
-            color: #152D65;
+        .menuIcon {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            vertical-align: middle;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+
+        .sjglIcon {
+            background-image: url('../img/pwyx/shujuguanli.png')
+        }
+
+        .sjglIcon:active, .sjglIcon:focus, .sjglIcon:hover {
+            background-image: url('../img/pwyx/shujuguanli_choice.png');
+        }
+
+        .xtkzIcon {
+            background-image: url('../img/pwyx/kongzhi.png')
+        }
+
+        .xtkzIcon:active, .xtkzIcon:focus, .xtkzIcon:hover {
+            background-image: url('../img/pwyx/kongzhi_choice.png');
+        }
+
+        .zhyyIcon {
+            background-image: url('../img/pwyx/yingyong.png')
+        }
+
+        .zhyyIcon:active, .zhyyIcon:focus, .zhyyIcon:hover {
+            background-image: url('../img/pwyx/yingyong_choice.png');
+        }
+
+        .nav > li > a:active, .nav > li > a:focus, .nav > li > a:hover {
+            background: transparent;
+            color: #1CBDE0;
+        }
+
+        .navbar-nav li a {
+            color: white;
         }
 
         .navbar-custom-menu li {
@@ -59,7 +97,7 @@
             width: 100%;
             height: 87vh;
             border: 1px solid red;
-            overflow: hidden;
+            background: transparent;
         }
 
         .indexTitleSty {
@@ -74,7 +112,36 @@
         .contentSty {
             background: linear-gradient(to right, #305694, #152D65);
         }
+
+        .sidebar-menu li a span {
+            color: white;
+        }
+
+        .sidebar-menu li a span:hover {
+            color: #1CBDE0;
+        }
     </style>
+    <!-- jQuery 3 -->
+    <script src="../lib/jquery.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="../js/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+      $.widget.bridge('uibutton', $.ui.button)
+    </script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="../lib/bootstrap.min.js"></script>
+    <script src="../js/bootstrap-datepicker.min.js"></script>
+    <!-- Slimscroll -->
+    <script src="../js/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="../js/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../js/adminlte.min.js"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="../js/dashboard.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <!--<script src="../js/demo.js"></script>-->
 </head>
 <body class="hold-transition sidebar-mini fixed">
 <div class="wrapper">
@@ -96,30 +163,30 @@
             <!--</a>-->
 
             <div class="navbar-custom-menu">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav sjglHover" onclick="clickSJGL()">
                     <!-- Control Sidebar Toggle Button -->
-                    <li class="custom-menu-li">
+                    <li onclick="">
                         <a href="#">
-                            <img src="../img/pwyx/shujuguanli_choice.png"/>
-                            <span> 数据管理</span>
+                            <span class="menuIcon sjglIcon"></span> 数据管理
+                            <!--<span class="sjglText"> 数据管理</span>-->
                         </a>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav xtkzHover" onclick="clickXTKZ()">
                     <!-- Control Sidebar Toggle Button -->
                     <li>
                         <a href="#">
-                            <img src="../img/pwyx/kongzhi_choice.png"/>
-                            <span> 系统控制</span>
+                            <span class="menuIcon xtkzIcon"></span> 系统控制
+                            <!--<span class="xtkzText"> 系统控制</span>-->
                         </a>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav zhyyHover" onclick="clickZHYY()">
                     <!-- Control Sidebar Toggle Button -->
                     <li>
                         <a href="#">
-                            <img src="../img/pwyx/yingyong_choice.png"/>
-                            <span> 智慧应用</span>
+                            <span class="menuIcon zhyyIcon"></span> 智慧应用
+                            <!--<span class="zhyyText"> 智慧应用</span>-->
                         </a>
                     </li>
                 </ul>
@@ -148,72 +215,83 @@
         <div style="text-align: center;color: #0f0;">额外需求</div>
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
+            <span>
             <!-- search form -->
-            <!--<form action="#" method="get" class="sidebar-form">-->
-            <!--<div class="input-group">-->
-            <!--<input type="text" name="q" class="form-control" placeholder="Search...">-->
-            <!--<span class="input-group-btn">-->
-            <!--<button type="submit" name="search" id="search-btn" class="btn btn-flat">-->
-            <!--<i class="fa fa-search"></i>-->
-            <!--</button>-->
-            <!--</span>-->
-            <!--</div>-->
-            <!--</form>-->
-            <!-- /.search form -->
-            <!-- sidebar menu: : style can be found in sidebar.less -->
-
-            <ul class="sidebar-menu" data-widget="tree">
-                <!--&lt;!&ndash;多级子菜单模型&ndash;&gt;-->
-                <!--<li class="active treeview">-->
-                <!--<a href="#">-->
-                <!--<i class="fa fa-dashboard"></i>-->
-                <!--<span>主面板</span>-->
-                <!--<span class="pull-right-container">-->
-                <!--<i class="fa fa-angle-left pull-right"></i>-->
+                <!--<form action="#" method="get" class="sidebar-form">-->
+                <!--<div class="input-group">-->
+                <!--<input type="text" name="q" class="form-control" placeholder="Search...">-->
+                <!--<span class="input-group-btn">-->
+                <!--<button type="submit" name="search" id="search-btn" class="btn btn-flat">-->
+                <!--<i class="fa fa-search"></i>-->
+                <!--</button>-->
                 <!--</span>-->
-                <!--</a>-->
-                <!--<ul class="treeview-menu">-->
-                <!--<li class="active"><a href="#"><i class="fa fa-circle-o"></i> 子集菜单1</a></li>-->
-                <!--<li><a href="#"><i class="fa fa-circle-o"></i> 子集菜单2</a></li>-->
-                <!--</ul>-->
-                <!--</li>-->
-                <!--<li class="treeview">-->
-                <!--<a href="#">-->
-                <!--<i class="fa fa-files-o"></i>-->
-                <!--<span>Test Options</span>-->
-                <!--<span class="pull-right-container">-->
-                <!--<span class="label label-primary pull-right">4</span>-->
-                <!--</span>-->
-                <!--</a>-->
-                <!--<ul class="treeview-menu">-->
-                <!--<li><a href="#"><i class="fa fa-circle-o"></i> test1</a></li>-->
-                <!--<li><a href="#"><i class="fa fa-circle-o"></i> test2</a></li>-->
-                <!--<li><a href="#"><i class="fa fa-circle-o"></i> test3</a></li>-->
-                <!--<li><a href="#"><i class="fa fa-circle-o"></i> test4</a></li>-->
-                <!--</ul>-->
-                <!--</li>-->
-                <li>
-                    <a href="#">
-                        <i class="fa fa-th"></i> <span>Widgets</span>
-                        <span class="pull-right-container">
-                            <small class="label pull-right bg-green">new</small>
-                        </span>
-                    </a>
-                </li>
-                <li><a href="#"><i class="fa fa-book"></i> <span>Documentation</span>
+                <!--</div>-->
+                <!--</form>-->
+                <!-- /.search form -->
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+            </span>
+            <ul id="sjgl" class="sidebar-menu" data-widget="tree">
+                <span><!--&lt;!&ndash;多级子菜单模型&ndash;&gt;-->
+                    <!--<li class="active treeview">-->
+                    <!--<a href="#">-->
+                    <!--<i class="fa fa-dashboard"></i>-->
+                    <!--<span class="pull-right-container">-->
+                    <!--<i class="fa fa-angle-left pull-right"></i>-->
+                    <!--</span>-->
+                    <!--</a>-->
+                    <!--<ul class="treeview-menu">-->
+                    <!--<li class="active"><a href="#"><i class="fa fa-circle-o"></i> 子集菜单1</a></li>-->
+                    <!--<li><a href="#"><i class="fa fa-circle-o"></i> 子集菜单2</a></li>-->
+                    <!--</ul>-->
+                    <!--</li>-->
+                    <!--<li class="treeview">-->
+                    <!--<a href="#">-->
+                    <!--<i class="fa fa-files-o"></i>-->
+                    <!--<span>Test Options</span>-->
+                    <!--<span class="pull-right-container">-->
+                    <!--<span class="label label-primary pull-right">4</span>-->
+                    <!--</span>-->
+                    <!--</a>-->
+                    <!--<ul class="treeview-menu">-->
+                    <!--<li><a href="#"><i class="fa fa-circle-o"></i> test1</a></li>-->
+                    <!--<li><a href="#"><i class="fa fa-circle-o"></i> test2</a></li>-->
+                    <!--<li><a href="#"><i class="fa fa-circle-o"></i> test3</a></li>-->
+                    <!--<li><a href="#"><i class="fa fa-circle-o"></i> test4</a></li>-->
+                    <!--</ul>-->
+                    <!--</li>--></span>
+                <li onclick="toRouteView('sdxl','sjgl/sdxl.html')">
+                    <a href="#"><i class="fa fa-th"></i> <span>输电效率</span>
+                    </a></li>
+                <li onclick="toRouteView('sdxl','sjgl/bdzjk.html')">
+                    <a href="#"><i class="fa fa-book"></i> <span>变电站监控</span>
+                    </a></li>
+                <li onclick="toRouteView('sdxl','sjgl/kv10xl.html')">
+                    <a href="#"><i class="fa fa-book"></i> <span>10Kv线路</span>
+                    </a></li>
+                <li onclick="toRouteView('sdxl','sjgl/pdzfjk.html')">
+                    <a href="#"><i class="fa fa-book"></i> <span>配电站房监控</span>
+                    </a></li>
+            </ul>
+            <ul id="xtkz" class="sidebar-menu hidden" data-widget="tree">
+                <li><a href="#"><i class="fa fa-th"></i> <span>车辆管理系统</span>
+                </a></li>
+                <li><a href="#"><i class="fa fa-book"></i> <span>用电信息采集</span>
+                </a></li>
+                <li><a href="#"><i class="fa fa-book"></i> <span>主网管控</span>
+                </a></li>
+                <li><a href="#"><i class="fa fa-book"></i> <span>分布式电源</span>
+                </a></li>
+                <li><a href="#"><i class="fa fa-book"></i> <span>配网自动化</span>
+                </a></li>
+                <li><a href="#"><i class="fa fa-book"></i> <span>智能小区</span>
+                </a></li>
+                <li><a href="#"><i class="fa fa-book"></i> <span>主网自动化</span>
                 </a></li>
             </ul>
-        </section>
-        <!-- /.sidebar -->
-        <section class="sidebar hidden">
-
-            <ul class="sidebar-menu" data-widget="tree">
-                <li>
-                    <a href="#">
-                        <i class="fa fa-th"></i> <span>Widgets</span>
-                    </a>
-                </li>
-                <li><a href="#"><i class="fa fa-book"></i> <span>Documentation</span>
+            <ul id="zhyy" class="sidebar-menu hidden" data-widget="tree">
+                <li><a href="#"><i class="fa fa-th"></i> <span>图像识别</span>
+                </a></li>
+                <li><a href="#"><i class="fa fa-book"></i> <span>电动车</span>
                 </a></li>
             </ul>
         </section>
@@ -223,7 +301,7 @@
     <div class="content-wrapper contentSty">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <div class="indexTitleSty" onclick="onIndexClick">
+            <div class="indexTitleSty" onclick="onIndexClick()">
                 首页
             </div>
             <ol class="breadcrumb">
@@ -233,20 +311,21 @@
         </section>
 
         <!-- Main content -->
-        <section class="content">
-            <iframe class="iFrameSty"></iframe>
+        <section class="content" id="iFrameContent">
+            <iframe class="iFrameSty" src="sjgl/sdxl.html"></iframe>
         </section>
         <!-- /.content -->
     </div>
+    <span>
     <!-- /.content-wrapper -->
-    <!--<footer class="main-footer">-->
-    <!--<div class="pull-right hidden-xs">-->
-    <!--<b>Version</b> 1.0.0-->
-    <!--</div>-->
-    <!--<strong>Copyright &copy; 2019-2024 .</strong> All rights-->
-    <!--reserved.-->
-    <!--</footer>-->
-
+        <!--<footer class="main-footer">-->
+        <!--<div class="pull-right hidden-xs">-->
+        <!--<b>Version</b> 1.0.0-->
+        <!--</div>-->
+        <!--<strong>Copyright &copy; 2019-2024 .</strong> All rights-->
+        <!--reserved.-->
+        <!--</footer>-->
+    </span>
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Create the tabs -->
@@ -277,30 +356,56 @@
 </div>
 <!-- ./wrapper -->
 
-<!-- jQuery 3 -->
-<script src="../lib/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="../js/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script>
-<!-- Bootstrap 3.3.7 -->
-<script src="../lib/bootstrap.min.js"></script>
-<script src="../js/bootstrap-datepicker.min.js"></script>
-<!-- Slimscroll -->
-<script src="../js/jquery.slimscroll.min.js"></script>
-<!-- FastClick -->
-<script src="../js/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="../js/adminlte.min.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="../js/dashboard.js"></script>
-<!-- AdminLTE for demo purposes -->
-<!--<script src="../js/demo.js"></script>-->
 <script>
   function onIndexClick () {
 
+  }
+
+  function clickSJGL () {
+    $('#sjgl').addClass('show').removeClass('hidden')
+    $('#xtkz').addClass('hidden').removeClass('show')
+    $('#zhyy').addClass('hidden').removeClass('show')
+  }
+
+  function clickXTKZ () {
+    $('#sjgl').addClass('hidden').removeClass('show')
+    $('#xtkz').addClass('show').removeClass('hidden')
+    $('#zhyy').addClass('hidden').removeClass('show')
+  }
+
+  function clickZHYY () {
+    $('#sjgl').addClass('hidden').removeClass('show')
+    $('#xtkz').addClass('hidden').removeClass('show')
+    $('#zhyy').addClass('show').removeClass('hidden')
+  }
+
+  $('.zhyyHover').hover(function () {
+    $('.zhyyIcon').css('background-image', 'url(\'../img/pwyx/yingyong_choice.png\')')
+    $('.zhyyText').css('color', '#1CBDE0')
+  }, function () {
+    $('.zhyyIcon').css('background-image', 'url(\'../img/pwyx/yingyong.png\')')
+    $('.zhyyText').css('color', 'white')
+  })
+  $('.xtkzHover').hover(function () {
+    $('.xtkzIcon').css('background-image', 'url(\'../img/pwyx/kongzhi_choice.png\')')
+    $('.xtkzText').css('color', '#1CBDE0')
+  }, function () {
+    $('.xtkzIcon').css('background-image', 'url(\'../img/pwyx/kongzhi.png\')')
+    $('.xtkzText').css('color', 'white')
+  })
+  $('.sjglHover').hover(function () {
+    $('.sjglIcon').css('background-image', 'url(\'../img/pwyx/shujuguanli_choice.png\')')
+    $('.sjglText').css('color', '#1CBDE0')
+  }, function () {
+    $('.sjglIcon').css('background-image', '')
+    $('.sjglText').css('color', '')
+  })
+
+  function toRouteView (string, url) {
+    console.log(string, url)
+    $('#iFrameContent').remove()
+    let content = "<iframe class=\'iFrameSty\' src=\'' + url + '\'></iframe>"
+    $('#iFrameContent').append(content)
   }
 </script>
 </body>
