@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<link href="../lib/bootstrap.min.css" rel="stylesheet">
+<script src="../lib/jquery.min.js"></script>
+<script src="../lib/bootstrap.min.js"></script>
+<head>
+    <meta charset="utf-8"/>
+    <title>站房巡视</title>
+    <style>
+        .header {
+            display: flex;
+            background-color: #12A09D;
+            padding: 2rem;
+            align-items: center;
+            font-size: 4rem;
+            color: #fff;
+        }
+
+        .header-title {
+            height: 100%;
+            width: 100%;
+            background-color: #12A09D;
+            text-align: center;
+        }
+
+        .content {
+            margin: 0 2%;
+        }
+
+        .footer {
+            position: fixed;
+            font-size: 5rem;
+            right: 0;
+            bottom: 0;
+        }
+
+        .bg-quadrant {
+
+            width: 8rem;
+            height: 8rem;
+            border-radius: 8rem 0 0 0;
+            background: chartreuse;
+        }
+
+        .spaceBlock {
+            width: 2rem;
+        }
+
+        .movedown {
+            padding: 40%;
+        }
+
+        .tab-title-main {
+            margin: 0;
+            padding: 0;
+            border-bottom: 2px solid lightgray;
+        }
+
+        .tab-title {
+            font-size: 4rem;
+            color: deepskyblue;
+            text-align: center;
+            background-color: #f5f5f5;
+            height: 8rem;
+            line-height: 8rem;
+            border: 1px solid lightgray;
+        }
+
+        .search-main {
+            margin: 0;
+            padding: 2rem;
+            background-color: #f5f5f5;
+            font-size: 3rem;
+        }
+
+        .search-input {
+            background-color: white;
+            font-size: 3rem;
+            -webkit-border-radius: 1rem;
+            -moz-border-radius: 1rem;
+            border-radius: 1rem;
+        }
+
+        .input-box {
+            font-size: 3rem;
+            width: 90%;
+            border-style: none;
+        }
+
+        .btn-sty {
+            padding: 0 1rem;
+            font-size: 3rem;
+            color: deepskyblue;
+            background-color: transparent;
+            border: 0;
+        }
+
+        .place-part {
+        }
+
+        .place-part-title {
+            padding: 2rem 0;
+            font-size: 4rem;
+        }
+
+        .place-num {
+            display: inline-block;
+            width: 4rem;
+            height: 4rem;
+            line-height: 4rem;
+            text-align: center;
+            border-radius: 50%;
+            color: white;
+            background-color: orange;
+        }
+
+        .place-title {
+            display: inline-block;
+            font-size: 4rem;
+        }
+
+        .place-time {
+            display: inline-block;
+            font-size: 4rem;
+        }
+
+        .qx-state {
+            display: inline-block;
+            font-size: 3rem;
+            color: lightgray;
+            padding: 1rem 0;
+        }
+
+        .line-space {
+            display: inline-block;
+            background-color: lightgray;
+            height: 2rem;
+            line-height: 2rem;
+            width: 2px;
+            margin: 0 2rem;
+            padding: 0;
+        }
+
+        .xsqd {
+            margin: 6rem 0;
+            font-size: 4rem;
+            border-radius: 1rem;
+            color: deepskyblue;
+            border-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="spaceBlock">
+        <span class="glyphicon glyphicon-chevron-left" style="height: 100%;"></span>
+    </div>
+    <div class="header-title">
+        站房巡视
+    </div>
+    <div class="spaceBlock"></div>
+</div>
+
+<div class="row tab-title-main">
+    <div class="col-xs-4 tab-title" style="background-color: white">待巡视</div>
+    <div class="col-xs-4 tab-title">已完结</div>
+    <div class="col-xs-4 tab-title">已作废</div>
+</div>
+<div class="row search-main">
+    <div class="col-xs-9 search-input">
+        <span class="glyphicon glyphicon-search"></span>
+        <input type="text" class="input-box"placeholder="搜索">
+    </div>
+    <div class="col-xs-3" style="text-align: center">
+        <div class="btn btn-xs btn-default btn-sty">查询</div>
+        <div class="btn btn-xs btn-default btn-sty">重置</div>
+    </div>
+</div>
+<div class="content">
+    <div class="place-part">
+        <div class="place-part-title">
+            <div class="place-num">1</div>
+            <div class="place-title">
+                港基#2环网柜
+            </div>
+            <div class="place-time pull-right">
+                2019-04-15
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="place-title" style="color: lightgray;">巡视类型：</div>
+                <div class="place-title">特殊巡视</div>
+            </div>
+            <div class="col-xs-6">
+                <div class="place-title" style="color: lightgray;">巡视状态：</div>
+                <div class="place-title">未完成</div>
+            </div>
+        </div>
+        <div class="qx-state">
+            <span>巡视人：</span>
+            <span style="color: #000;">逗比</span>
+        </div>
+        <div class="line-space"></div>
+        <div class="qx-state">
+            <span>缺陷：</span>
+            <span style="color: #000;">2,1</span>
+        </div>
+        <div class="line-space"></div>
+        <div class="qx-state">
+            <span style="color: #31a39b;">作废</span>
+        </div>
+    </div>
+    <div class="place-part">
+        <div class="place-part-title">
+            <div class="place-num">2</div>
+            <div class="place-title">
+                港基#2环网柜
+            </div>
+            <div class="place-time pull-right">
+                2019-04-15
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="place-title" style="color: lightgray;">巡视类型：</div>
+                <div class="place-title">特殊巡视</div>
+            </div>
+            <div class="col-xs-6">
+                <div class="place-title" style="color: lightgray;">巡视状态：</div>
+                <div class="place-title">未完成</div>
+            </div>
+        </div>
+        <div class="qx-state">
+            <span>巡视人：</span>
+            <span style="color: #000;">逗比</span>
+        </div>
+        <div class="line-space"></div>
+        <div class="qx-state">
+            <span>缺陷：</span>
+            <span style="color: #000;">2,1</span>
+        </div>
+        <div class="line-space"></div>
+        <div class="qx-state">
+            <span style="color: #31a39b;">作废</span>
+        </div>
+    </div>
+    <div class="place-part">
+        <div class="place-part-title">
+            <div class="place-num">3</div>
+            <div class="place-title">
+                港基#2环网柜
+            </div>
+            <div class="place-time pull-right">
+                2019-04-15
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="place-title" style="color: lightgray;">巡视类型：</div>
+                <div class="place-title">特殊巡视</div>
+            </div>
+            <div class="col-xs-6">
+                <div class="place-title" style="color: lightgray;">巡视状态：</div>
+                <div class="place-title">未完成</div>
+            </div>
+        </div>
+        <div class="qx-state">
+            <span>巡视人：</span>
+            <span style="color: #000;">逗比</span>
+        </div>
+        <div class="line-space"></div>
+        <div class="qx-state">
+            <span>缺陷：</span>
+            <span style="color: #000;">2,1</span>
+        </div>
+        <div class="line-space"></div>
+        <div class="qx-state">
+            <span style="color: #31a39b;">作废</span>
+        </div>
+    </div>
+    <div class="place-part">
+        <div class="place-part-title">
+            <div class="place-num">4</div>
+            <div class="place-title">
+                港基#2环网柜
+            </div>
+            <div class="place-time pull-right">
+                2019-04-15
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="place-title" style="color: lightgray;">巡视类型：</div>
+                <div class="place-title">特殊巡视</div>
+            </div>
+            <div class="col-xs-6">
+                <div class="place-title" style="color: lightgray;">巡视状态：</div>
+                <div class="place-title">未完成</div>
+            </div>
+        </div>
+        <div class="qx-state">
+            <span>巡视人：</span>
+            <span style="color: #000;">逗比</span>
+        </div>
+        <div class="line-space"></div>
+        <div class="qx-state">
+            <span>缺陷：</span>
+            <span style="color: #000;">2,1</span>
+        </div>
+        <div class="line-space"></div>
+        <div class="qx-state">
+            <span style="color: #31a39b;">作废</span>
+        </div>
+    </div>
+</div>
+</div>
+<div class="footer">
+    <div class="quadrant">
+        <div class="bg-quadrant">
+            <span class="glyphicon glyphicon-th-large movedown " style="color: #199560;">
+
+            </span>
+        </div>
+    </div>
+</div>
+</body>
+</html>
